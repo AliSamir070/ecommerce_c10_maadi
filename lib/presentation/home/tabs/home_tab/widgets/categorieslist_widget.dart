@@ -25,11 +25,10 @@ class _CategoriesLitWidgetState extends State<CategoriesLitWidget> {
   Widget build(BuildContext context) {
     return BlocConsumer<HomeTabViewModel, HomeTabStates>(
       buildWhen: (prevState , currentState){
-        print("build ${currentState}");
-        if(currentState is HomeTabLoadingState || currentState is HomeTabErrorState){
-          return false;
+        if(currentState is HomeTabSuccessState){
+          return true;
         }
-        return true;
+        return false;
       },
       listenWhen: (prev , currentState){
         if(currentState is HomeTabLoadingState || currentState is HomeTabErrorState || currentState is HomeTabSuccessState){

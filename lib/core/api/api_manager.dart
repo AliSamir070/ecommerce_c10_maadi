@@ -8,7 +8,7 @@ class ApiManager{
   static init(){
     dio = Dio(
       BaseOptions(
-        baseUrl: Constants.baseUrl
+        baseUrl: Constants.baseUrl,
       )
     );
   }

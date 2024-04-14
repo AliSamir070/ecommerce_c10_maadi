@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_c10_maadi/core/utils/assets_manager.dart';
 import 'package:ecommerce_c10_maadi/core/utils/strings_manager.dart';
 import 'package:ecommerce_c10_maadi/presentation/home/tabs/home_tab/view_model/HomeTabViewModel.dart';
+import 'package:ecommerce_c10_maadi/presentation/home/tabs/home_tab/widgets/brands_list_widget.dart';
 import 'package:ecommerce_c10_maadi/presentation/home/tabs/home_tab/widgets/categorieslist_widget.dart';
 import 'package:ecommerce_c10_maadi/presentation/home/tabs/home_tab/widgets/category_widget.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +67,37 @@ class HomeTab extends StatelessWidget {
               ),
             ),
             SliverToBoxAdapter(child: SizedBox(height: 16.h,)),
-            CategoriesLitWidget()
+            CategoriesLitWidget(),
+            SliverToBoxAdapter(child: SizedBox(height: 24.h,)),
+            SliverToBoxAdapter(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    StringsManager.brands,
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .headlineLarge,
+                  ),
+                  Text(
+                    StringsManager.viewAll,
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .headlineLarge
+                        ?.copyWith(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 12.sp
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SliverToBoxAdapter(child: SizedBox(height: 16.h,)),
+            SliverToBoxAdapter(
+              child: BrandsListWidget(),
+            )
           ],
         ),
       ),
