@@ -26,6 +26,7 @@ class _BrandsListWidgetState extends State<BrandsListWidget> {
         buildWhen: (previous, current) => current is BrandsSuccessState
       || current is BrandsErrorState || current is BrandsLoadingState,
         builder: (context, state) {
+          HomeTabViewModel viewModel = HomeTabViewModel.get(context);
           if(state is BrandsErrorState){
             return Center(child: Text(state.error),);
           }

@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
         routes: {
           RoutesManager.homeRouteName:(_)=>HomeScreen()
         },
+        debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
         themeMode: ThemeMode.light,
         initialRoute: RoutesManager.homeRouteName,

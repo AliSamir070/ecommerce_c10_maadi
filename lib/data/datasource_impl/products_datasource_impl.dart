@@ -14,8 +14,10 @@ class ProductsDataSourceImpl extends ProductsDataSource{
   @override
   Future<Either<ProductsResponse, String>> getProducts({String? sort}) async{
     try{
-      var response = await apiManager.getRequest(endpoint: Endpoints.productsEndpoint);
-      return Left(ProductsResponse.fromJson(response));
+      var response = await apiManager.getRequest(endpoint: Endpoints.productsEndpoint,queryParameters: {
+        "sort":sort
+      });
+      return Left(ProductsResponse.fromJson(response.data));
     }catch(error){
       return Right(error.toString());
     }

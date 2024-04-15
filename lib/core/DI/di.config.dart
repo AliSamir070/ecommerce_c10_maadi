@@ -25,8 +25,11 @@ import '../../domain/repository_contracts/categories_repo.dart' as _i11;
 import '../../domain/repository_contracts/products_repo.dart' as _i17;
 import '../../domain/usecases/brands_usecase.dart' as _i8;
 import '../../domain/usecases/categories_usecase.dart' as _i13;
-import '../../presentation/home/tabs/home_tab/view_model/HomeTabViewModel.dart'
+import '../../domain/usecases/most_selling_products_usecase.dart' as _i19;
+import '../../presentation/home/tabs/categories_tab/view_model/CategoriesViewModel.dart'
     as _i14;
+import '../../presentation/home/tabs/home_tab/view_model/HomeTabViewModel.dart'
+    as _i20;
 import '../api/api_manager.dart' as _i3;
 
 extension GetItInjectableX on _i1.GetIt {
@@ -53,14 +56,19 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i12.CategoriesRepoImpl(gh<_i9.CategoriesDataSource>()));
     gh.factory<_i13.CategoriesUseCase>(
         () => _i13.CategoriesUseCase(gh<_i11.CategoriesRepo>()));
-    gh.factory<_i14.HomeTabViewModel>(() => _i14.HomeTabViewModel(
-          gh<_i13.CategoriesUseCase>(),
-          gh<_i8.BrandsUseCase>(),
-        ));
+    gh.factory<_i14.CategoriesViewModel>(
+        () => _i14.CategoriesViewModel(gh<_i13.CategoriesUseCase>()));
     gh.factory<_i15.ProductsDataSource>(
         () => _i16.ProductsDataSourceImpl(gh<_i3.ApiManager>()));
     gh.factory<_i17.ProductsRepo>(
         () => _i18.ProductsRepoImpl(gh<_i15.ProductsDataSource>()));
+    gh.factory<_i19.MostSellingProductsUseCase>(
+        () => _i19.MostSellingProductsUseCase(gh<_i17.ProductsRepo>()));
+    gh.factory<_i20.HomeTabViewModel>(() => _i20.HomeTabViewModel(
+          gh<_i13.CategoriesUseCase>(),
+          gh<_i8.BrandsUseCase>(),
+          gh<_i19.MostSellingProductsUseCase>(),
+        ));
     return this;
   }
 }
