@@ -12,7 +12,7 @@ import '../../core/utils/assets_manager.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
-  static const List<Widget> tabs = [
+  static List<Widget> tabs = [
     HomeTab(),
     CategoriesTab(),
     WhishlistTab(),

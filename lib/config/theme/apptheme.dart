@@ -22,6 +22,21 @@ class AppTheme{
         fontSize: 18.sp,
         color: ColorManager.headlineColor,
         fontWeight: FontWeight.w500
+      ),
+      headlineMedium: TextStyle(
+        fontSize: 24.sp,
+        fontWeight: FontWeight.w600,
+        color: Colors.white
+      ),
+      labelMedium: TextStyle(
+        color: Colors.black,
+        fontWeight: FontWeight.w300,
+        fontSize: 18.sp
+      ),
+      labelSmall: TextStyle(
+        fontWeight: FontWeight.w600,
+        fontSize: 20.sp,
+        color: ColorManager.primaryColor
       )
     )
   );
