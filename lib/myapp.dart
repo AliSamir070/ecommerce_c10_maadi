@@ -1,4 +1,5 @@
 import 'package:ecommerce_c10_maadi/config/theme/apptheme.dart';
+import 'package:ecommerce_c10_maadi/core/local/prefs_helper.dart';
 import 'package:ecommerce_c10_maadi/core/utils/routes_manager.dart';
 import 'package:ecommerce_c10_maadi/presentation/home/home_screen.dart';
 import 'package:ecommerce_c10_maadi/presentation/signin_user/signin_screen.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
         themeMode: ThemeMode.light,
-        initialRoute: RoutesManager.signInRouteName,
+        initialRoute: PrefsHelper.getToken().isNotEmpty?RoutesManager.homeRouteName:RoutesManager.signInRouteName,
       ),
     );
   }

@@ -1,4 +1,6 @@
 import 'package:ecommerce_c10_maadi/data/datasource_contract/products_datasource.dart';
+import 'package:ecommerce_c10_maadi/domain/entites/CartResponseEntity/CartResponseEntity.dart';
+import 'package:ecommerce_c10_maadi/domain/usecases/add_to_cart_usecase.dart';
 import 'package:ecommerce_c10_maadi/domain/usecases/brands_usecase.dart';
 import 'package:ecommerce_c10_maadi/domain/usecases/categories_usecase.dart';
 import 'package:ecommerce_c10_maadi/domain/usecases/most_selling_products_usecase.dart';
@@ -12,12 +14,13 @@ import '../../../../../domain/entites/ProductEntity.dart';
 @injectable
 class HomeTabViewModel extends Cubit<HomeTabStates>{
   @factoryMethod
-  HomeTabViewModel(this.categoriesUseCase,this.brandsUseCase,this.mostSellingProductsUseCase):super(HomeTabInitialState());
+  HomeTabViewModel(this.addToCartUseCase,this.categoriesUseCase,this.brandsUseCase,this.mostSellingProductsUseCase):super(HomeTabInitialState());
 
   static HomeTabViewModel get(BuildContext context) =>BlocProvider.of(context);
   CategoriesUseCase categoriesUseCase;
   BrandsUseCase brandsUseCase;
   MostSellingProductsUseCase mostSellingProductsUseCase;
+  AddToCartUseCase addToCartUseCase;
   GetCategories()async{
     emit(HomeTabLoadingState());
     var result = await categoriesUseCase.call();
@@ -45,6 +48,15 @@ class HomeTabViewModel extends Cubit<HomeTabStates>{
       emit(MostSellingProductsSuccessState(products));
     }, (error) {
       emit(MostSellingProductsErrorState(error));
+    });
+  }
+  AddProductToCart({required String productId})async{
+    emit(AddToCartLoadingState(productId));
+    var result = await addToCartUseCase.call(productId: productId);
+    result.fold((cartResponseEntity){
+      emit(AddToCartSuccessState(cartResponseEntity,productId));
+    }, (error) {
+      emit(AddToCartErrorState(error,productId));
     });
   }
 }
@@ -77,4 +89,18 @@ class MostSellingProductsSuccessState extends HomeTabStates{
 class MostSellingProductsErrorState extends HomeTabStates{
   String error;
   MostSellingProductsErrorState(this.error);
+}
+class AddToCartLoadingState extends HomeTabStates{
+  String productId;
+  AddToCartLoadingState(this.productId);
+}
+class AddToCartErrorState extends HomeTabStates{
+  String error;
+  String productId;
+  AddToCartErrorState(this.error,this.productId);
+}
+class AddToCartSuccessState extends HomeTabStates{
+  CartResponseEntity cartResponseEntity;
+  String productId;
+  AddToCartSuccessState(this.cartResponseEntity,this.productId);
 }

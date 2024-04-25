@@ -9,6 +9,12 @@ class ApiManager{
     dio = Dio(
       BaseOptions(
         baseUrl: Constants.baseUrl,
+        validateStatus: (status){
+          if(status!<500){
+            return true;
+          }
+          return false;
+        }
       )
     );
   }
@@ -17,7 +23,9 @@ class ApiManager{
     var response = await dio.get(endpoint,queryParameters: queryParameters);
     return response;
   }
-  Future<Response> postRequest({required String endpoint , Map<String,dynamic>? body})async{
-    return await dio.post(endpoint,data: body);
+  Future<Response> postRequest({required String endpoint , Map<String,dynamic>? body , Map<String, dynamic>? headers})async{
+    return await dio.post(endpoint,data: body,options: Options(
+      headers: headers
+    ));
   }
 }

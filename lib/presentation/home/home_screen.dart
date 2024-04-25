@@ -1,3 +1,5 @@
+import 'package:ecommerce_c10_maadi/core/local/prefs_helper.dart';
+import 'package:ecommerce_c10_maadi/core/utils/routes_manager.dart';
 import 'package:ecommerce_c10_maadi/presentation/home/home_view_model.dart';
 import 'package:ecommerce_c10_maadi/presentation/home/tabs/categories_tab/CategoriesTab.dart';
 import 'package:ecommerce_c10_maadi/presentation/home/tabs/home_tab/homeTab.dart';
@@ -30,6 +32,24 @@ class HomeScreen extends StatelessWidget {
           height: 22.h,
           width: 66.w,
         ),
+        actions: [
+          IconButton(
+            onPressed: (){
+              PrefsHelper.clearToken();
+              Navigator.pushNamedAndRemoveUntil(context, RoutesManager.signInRouteName, (route) => false);
+            },
+            icon: Icon(
+              Icons.logout,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+          IconButton(
+            onPressed: (){},
+            icon: SvgPicture.asset(
+              AssetsManager.cartIcon
+            )
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: homeViewModel.currentTabIndex,
